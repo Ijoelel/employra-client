@@ -8,7 +8,9 @@ export const DBInit = () => {
             JSON.stringify([
                 {
                     id: "1",
-                    name: "admin",
+                    firstname: "Afrizal",
+                    lastname: "Luthfi",
+                    address: "Surabaya, Indonesia",
                     username: "admin",
                     phone: "0987654321",
                     password: "12345678",

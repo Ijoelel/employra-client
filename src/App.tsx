@@ -7,6 +7,7 @@ import DefaultPage from "./pages/DefaultPage";
 import AppLayout from "./layout/AppLayout";
 import Employee from "./pages/Dashboard/Employee";
 import Division from "./pages/Dashboard/Division";
+import UserProfiles from "./pages/Dashboard/UserProfiles";
 
 function App() {
     DBInit();
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/divisions" element={<Division />} />
                     <Route path="/employees" element={<Employee />} />
+                    <Route path="/profiles" element={<UserProfiles />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<DefaultPage />} />

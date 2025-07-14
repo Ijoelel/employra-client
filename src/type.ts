@@ -1,6 +1,8 @@
 export type UserDB = {
     id: string;
-    name: string;
+    firstname: string;
+    lastname: string;
+    address: string;
     username: string;
     phone: string;
     email: string;
@@ -9,7 +11,9 @@ export type UserDB = {
 
 export type User = {
     id: string;
-    name: string;
+    firstname: string;
+    lastname: string;
+    address: string;
     username: string;
     phone: string;
     email: string;
