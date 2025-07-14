@@ -1,15 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import type { DivisionData, EmployeeData } from "../../type";
 import TableAction from "./TableAction";
+import { deleteData } from "../../utils/db";
+import EmployeeModal from "../modal/EmployeeModal";
 
 interface TableRowProps {
     index: number;
     rowData: DivisionData | EmployeeData;
     type: "division" | "employee";
+    dataLength: number;
+    setEmployees: React.Dispatch<SetStateAction<EmployeeData[]>>;
 }
 
-const TableRow = ({ index, rowData, type }: TableRowProps) => {
+const TableRow = ({
+    index,
+    rowData,
+    type,
+    dataLength,
+    setEmployees,
+}: TableRowProps) => {
     const [showActions, setShowActions] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const toggleAction = () => {
         const shouldOpen = !showActions;
@@ -23,6 +34,16 @@ const TableRow = ({ index, rowData, type }: TableRowProps) => {
         return () =>
             window.removeEventListener("close-all-actions", handleClose);
     }, []);
+
+    const handleDelete = () => {
+        setEmployees(deleteData("employees", rowData.id || ""));
+        setShowActions(false);
+    };
+
+    const handleEdit = () => {
+        setModalOpen(true);
+        setShowActions(false);
+    };
 
     if (type === "employee") {
         const data = rowData as EmployeeData;
@@ -78,8 +99,20 @@ const TableRow = ({ index, rowData, type }: TableRowProps) => {
                         </svg>
                     </button>
                     {showActions && (
-                        <TableAction isOpen={showActions} index={index} />
+                        <TableAction
+                            isOpen={showActions}
+                            dataLength={dataLength}
+                            index={index}
+                            onDelete={handleDelete}
+                            onEdit={handleEdit}
+                        />
                     )}
+                    <EmployeeModal
+                        isOpen={modalOpen}
+                        onClose={() => setModalOpen(false)}
+                        initialData={rowData as EmployeeData}
+                        setEmployees={setEmployees}
+                    />
                 </td>
             </tr>
         );

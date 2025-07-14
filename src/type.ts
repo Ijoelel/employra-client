@@ -41,10 +41,11 @@ export type EmployeeData = {
     position: string;
     age: number;
     phone: string;
-    image: string;
+    image?: string;
     [key: string]: string | number | undefined;
 };
 
 export type DivisionData = {
+    id: string;
     name: string;
 };

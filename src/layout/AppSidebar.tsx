@@ -2,7 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 
 // Assume these icons are imported from an icon library
-import { ChevronDownIcon, GridIcon, HorizontaLDots } from "../icons";
+import {
+    ChevronDownIcon,
+    ChevronUpIcon,
+    GridIcon,
+    HorizontaLDots,
+} from "../icons";
 import { useSidebar } from "../hooks/useSidebar";
 
 type NavItem = {
@@ -122,9 +127,12 @@ const AppSidebar = () => {
                                     •{nav.name}
                                 </span>
                             )}
-                            {(isExpanded || isHovered || isMobileOpen) && (
-                                <ChevronDownIcon />
-                            )}
+                            {(isExpanded || isHovered || isMobileOpen) &&
+                                (openSubmenu?.index === index ? (
+                                    <ChevronDownIcon />
+                                ) : (
+                                    <ChevronUpIcon />
+                                ))}
                         </button>
                     ) : (
                         nav.path && (
@@ -250,12 +258,10 @@ const AppSidebar = () => {
                 <Link to="/">
                     {isExpanded || isHovered || isMobileOpen ? (
                         <p className="text-2xl font-bold flex items-center gap-2 text-blue-500">
-                            Admin Dashboard
+                            Employra
                         </p>
                     ) : (
-                        <p className="text-lg font-bold flex items-center gap-2 text-blue-500">
-                            
-                        </p>
+                        <p className="text-lg font-bold flex items-center gap-2 text-blue-500"></p>
                     )}
                 </Link>
             </div>
@@ -281,7 +287,6 @@ const AppSidebar = () => {
                     </div>
                 </nav>
             </div>
-            
         </aside>
     );
 };

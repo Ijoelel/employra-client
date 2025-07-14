@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState } from "react";
 import Button from "../../components/form/Button";
 import { useAuth } from "../../hooks/useAuth";
 import AuthLayout from "./AuthPageLayout";
@@ -15,7 +15,7 @@ const Login = () => {
 
     const { login } = useAuth();
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
         if (
@@ -49,7 +49,7 @@ const Login = () => {
                                 </p>
                             </div>
                             <div>
-                                <form onSubmit={handleSubmit}>
+                                <form>
                                     <div className="space-y-6">
                                         <div>
                                             <Label>
@@ -110,6 +110,7 @@ const Login = () => {
                                             <Button
                                                 className="w-full "
                                                 size="sm"
+                                                onClick={handleSubmit}
                                             >
                                                 Sign in
                                             </Button>

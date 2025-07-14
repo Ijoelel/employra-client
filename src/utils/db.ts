@@ -1,3 +1,5 @@
+import type { EmployeeData } from "../type";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const DBInit = () => {
     if (!localStorage.getItem("users")) {
@@ -373,21 +375,30 @@ export const readData = (key: string) => {
 
 export const createData = (key: string, data: any) => {
     const existingData = readData(key);
-    return localStorage.setItem(key, JSON.stringify([...existingData, data]));
+    localStorage.setItem(key, JSON.stringify([...existingData, data]));
+    return [...existingData, data];
 };
 
-export const updateData = (key: string, index: number, data: any) => {
+export const updateData = (key: string, id: string, data: any) => {
     const existingData = readData(key);
-    if (Array.isArray(existingData) && existingData[index]) {
-        existingData[index] = data;
+    if (Array.isArray(existingData)) {
+        const index = existingData.findIndex((item) => item.id === id);
+        if (index !== -1) {
+            existingData[index] = data;
+        }
     }
+    localStorage.setItem(key, JSON.stringify(existingData));
 
-    return localStorage.setItem(key, JSON.stringify(existingData));
+    return existingData;
 };
 
-export const deleteData = (key: string, index: number) => {
+export const deleteData = (key: string, id: string) => {
     const existingData = readData(key);
-    existingData.splice(index, 1);
 
-    return localStorage.setItem(key, JSON.stringify(existingData));
+    const index = existingData.findIndex(
+        (item: EmployeeData) => item.id === id
+    );
+    existingData.splice(index, 1);
+    localStorage.setItem(key, JSON.stringify(existingData));
+    return existingData;
 };

@@ -24,13 +24,20 @@ const Employee = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-    useEffect(() => {
-        setEmployees(paginate(employeesData, pageIndex));
-    }, [employeesData, pageIndex]);
+    const handleSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            setSearchParams({
+                page: "1",
+                search: e.currentTarget.value,
+            });
+        }
+    };
 
     const handleAddEmployee = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
+        console.log("tes");
         setSelectedEmployee(null);
         setModalOpen(true);
     };
@@ -57,6 +64,10 @@ const Employee = () => {
     };
 
     useEffect(() => {
+        setEmployees(paginate(employeesData, pageIndex));
+    }, [employeesData, pageIndex]);
+
+    useEffect(() => {
         const filtered_employees = employeesDBData.filter(
             (employee: EmployeeData) =>
                 employee.name
@@ -75,16 +86,6 @@ const Employee = () => {
         );
         setEmployeesData(filtered_employees);
     }, [searchParams]);
-
-    const handleSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            setSearchParams({
-                page: "1",
-                search: e.currentTarget.value,
-            });
-        }
-    };
 
     return (
         <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
@@ -131,7 +132,7 @@ const Employee = () => {
                                 </div>
                                 <Button
                                     className="h-10"
-                                    onClick={() => handleAddEmployee}
+                                    onClick={handleAddEmployee}
                                 >
                                     <PlusIcon />
                                     <span className="">Add Employee</span>
@@ -173,6 +174,8 @@ const Employee = () => {
                                                 index={index}
                                                 type="employee"
                                                 key={index}
+                                                dataLength={employees.length}
+                                                setEmployees={setEmployeesData}
                                             />
                                         )
                                     )}
@@ -188,6 +191,7 @@ const Employee = () => {
                 onClose={() => setModalOpen(false)}
                 onSubmit={handleSubmit}
                 initialData={selectedEmployee}
+                setEmployees={setEmployeesData}
             />
         </div>
     );

@@ -1,14 +1,14 @@
 import React from "react";
 
 interface ButtonProps {
-    children: React.ReactNode; // Button text or content
-    size?: "sm" | "md"; // Button size
-    variant?: "primary" | "outline"; // Button variant
-    startIcon?: React.ReactNode; // Icon before the text
-    endIcon?: React.ReactNode; // Icon after the text
-    onClick?: () => void; // Click handler
-    disabled?: boolean; // Disabled state
-    className?: string; // Disabled state
+    children: React.ReactNode;
+    size?: "sm" | "md";
+    variant?: "primary" | "outline";
+    startIcon?: React.ReactNode;
+    endIcon?: React.ReactNode;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    disabled?: boolean;
+    className?: string;
 }
 
 const Button = ({
@@ -41,6 +41,7 @@ const Button = ({
                 disabled ? "cursor-not-allowed opacity-50" : ""
             }`}
             onClick={onClick}
+            type="button"
             disabled={disabled}
         >
             {startIcon && (

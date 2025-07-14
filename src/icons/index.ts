@@ -54,12 +54,14 @@ import ChatIcon from "./chat.svg";
 import MoreDotIcon from "./moredot.svg";
 import AlertHexaIcon from "./alert-hexa.svg";
 import ErrorHexaIcon from "./info-hexa.svg";
+import SidebarIcon from "./sidebar.svg";
 
 export {
     ErrorHexaIcon,
     AlertHexaIcon,
     MoreDotIcon,
     DownloadIcon,
+    SidebarIcon,
     FileIcon,
     GridIcon,
     AudioIcon,
