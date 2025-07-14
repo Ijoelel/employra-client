@@ -20,8 +20,6 @@ interface EmployeeModalProps {
 const EmployeeModal = ({
     isOpen,
     onClose,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    onSubmit,
     initialData = null,
     setEmployees,
 }: EmployeeModalProps) => {
