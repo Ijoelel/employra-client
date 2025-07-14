@@ -5,7 +5,9 @@ import { readData } from "../utils/db";
 
 const defaultUser: User = {
     id: "",
-    name: "",
+    firstname: "",
+    lastname: "",
+    address: "",
     email: "",
     username: "",
     phone: "",
